@@ -2,10 +2,10 @@ import { mapState, mapActions } from 'vuex';
 
 var generalMixin = {
   computed: {
-    ...mapState(['loading', 'alertType', 'alertMsg'])
+    ...mapState(['loading', 'alertType', 'alertMsg', 'phoneBookEntries'])
   },
   methods: {
-    ...mapActions(['alert'])
+    ...mapActions(['alert', 'apiGetPhoneBookEntries'])
   }
 };
 

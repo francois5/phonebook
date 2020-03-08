@@ -21,6 +21,7 @@ const store = new Vuex.Store({
     loading: true,
     alertMsg: null,
     alertType: null,
+    phoneBookEntries: [],
   },
   mutations: {
     startLoading(state) {
@@ -43,6 +44,21 @@ const store = new Vuex.Store({
       setTimeout(function() {
         that.commit('hideAlert');
       }, time);
+    },
+    apiGetPhoneBookEntries({ commit }) {
+      const that = this;
+      that.commit('startLoading');
+      axios.get(API_ROOT+'db-connect.php')//'phone-book-entries')
+        .then(function(res) {
+          that.state.phoneBookEntries = [res.data];
+          that.commit('stopLoading');
+          that.dispatch('alert', { msg: 'Success', type: 'success' });
+        })
+        .catch(function (err) {
+          console.log(err);
+          that.commit('stopLoading');
+          that.dispatch('alert', { msg: 'Error', type: 'danger' });
+        });
     },
   }
 });
