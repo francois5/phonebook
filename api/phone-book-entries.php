@@ -6,8 +6,12 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, origin");
 header("Access-Control-Allow-Methods: GET,POST,PUT,OPTIONS");
 header('Content-Type: application/json');
+
 function validEntry($entry) {
-    return true;
+    preg_match('/^[\+]\d{1,} \d{1,} \d{6,}/i', $entry['phoneNumber'], $matches, PREG_OFFSET_CAPTURE, 0);
+    return $entry['firstName'] && $entry['firstName'] != null
+	&& $entry['lastName'] && $entry['lastName'] != null
+	&& count($matches) > 0;
 }
 
 if($request_method == 'GET') {
