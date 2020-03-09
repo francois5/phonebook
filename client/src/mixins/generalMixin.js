@@ -5,7 +5,7 @@ var generalMixin = {
     ...mapState(['loading', 'alertType', 'alertMsg', 'phoneBookEntries'])
   },
   methods: {
-    ...mapActions(['alert', 'apiGetPhoneBookEntries'])
+    ...mapActions(['alert', 'apiGetPhoneBookEntries', 'apiPostPhoneBookEntries', 'apiPutPhoneBookEntries'])
   }
 };
 

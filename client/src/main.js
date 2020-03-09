@@ -45,12 +45,40 @@ const store = new Vuex.Store({
         that.commit('hideAlert');
       }, time);
     },
-    apiGetPhoneBookEntries({ commit }) {
+    apiGetPhoneBookEntries({ commit }, data) {
       const that = this;
       that.commit('startLoading');
-      axios.get(API_ROOT+'db-connect.php')//'phone-book-entries')
+      axios.get(API_ROOT+'phone-book-entries.php?'+new URLSearchParams(data).toString())
         .then(function(res) {
-          that.state.phoneBookEntries = [res.data];
+          that.state.phoneBookEntries = res.data;
+          that.commit('stopLoading');
+          that.dispatch('alert', { msg: 'Success', type: 'success' });
+        })
+        .catch(function (err) {
+          console.log(err);
+          that.commit('stopLoading');
+          that.dispatch('alert', { msg: 'Error', type: 'danger' });
+        });
+    },
+    apiPostPhoneBookEntries({ commit }, data) {
+      const that = this;
+      that.commit('startLoading');
+      axios.post(API_ROOT+'phone-book-entries.php', data, {headers: {"Content-Type": "application/json"}})
+        .then(function(res) {
+          that.commit('stopLoading');
+          that.dispatch('alert', { msg: 'Success', type: 'success' });
+        })
+        .catch(function (err) {
+          console.log(err);
+          that.commit('stopLoading');
+          that.dispatch('alert', { msg: 'Error', type: 'danger' });
+        });
+    },
+    apiPutPhoneBookEntries({ commit }, data) {
+      const that = this;
+      that.commit('startLoading');
+      axios.put(API_ROOT+'phone-book-entries.php', data, {headers: {"Content-Type": "application/json"}})
+        .then(function(res) {
           that.commit('stopLoading');
           that.dispatch('alert', { msg: 'Success', type: 'success' });
         })
