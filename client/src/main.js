@@ -18,7 +18,7 @@ Vue.component('navbar', Navbar);
 
 const store = new Vuex.Store({
   state: {
-    loading: true,
+    loading: false,
     alertMsg: null,
     alertType: null,
     phoneBookEntries: [],
