@@ -48,7 +48,7 @@ describe('Home', () => {
     expect(wrapper.vm.phoneNumberInput).toBe('+32 12 3456789');
   });
   
-  test('should call apiPutPhoneBookEntries when submit is clicked', () => {
+  test('should call apiPutPhoneBookEntry when submit is clicked', () => {
     wrapper.find('.submit-btn').trigger('click');
     expect(actions.apiPutPhoneBookEntry).toHaveBeenCalled();
   });

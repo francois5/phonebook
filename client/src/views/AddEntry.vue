@@ -1,6 +1,6 @@
 <template>
-  <div id="edit-entry">
-    <navbar view="EditEntry" title="Phone book"></navbar>
+  <div id="add-entry">
+    <navbar view="AddEntry" title="Phone book"></navbar>
     <b-form-group class="form-label-group">
       <b-form-input id="input-first-name" v-model="firstNameInput" class="form-control" placeholder="First name"></b-form-input>
     </b-form-group>
@@ -18,9 +18,8 @@
 import generalMixin from '../mixins/generalMixin';
 
 export default {
-  name: 'EditEntry',
+  name: 'AddEntry',
   mixins: [generalMixin],
-  props: ['id'],
   data () {
     return {
       firstNameInput: null,
@@ -28,19 +27,9 @@ export default {
       phoneNumberInput: null,
     }
   },
-  mounted() {
-    this.initFormFields();
-  },
   methods: {
-    initFormFields() {
-      const entry = this.phoneBookEntries.filter(e => e._id.$oid === this.id)[0];
-      this.firstNameInput = entry.firstName;
-      this.lastNameInput = entry.lastName;
-      this.phoneNumberInput = entry.phoneNumber;
-    },
     submit() {
-      this.apiPutPhoneBookEntry({
-        _id: {$oid:this.id},
+      this.$store.dispatch('apiPostPhoneBookEntry', {
         firstName: this.firstNameInput,
         lastName: this.lastNameInput,
         phoneNumber: this.phoneNumberInput
