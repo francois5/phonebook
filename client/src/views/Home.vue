@@ -30,7 +30,7 @@ export default {
       this.apiGetPhoneBookEntries({search: this.searchInput});
     },
     edit(phoneBookEntry) {
-      router.push({ path: 'edit-entry', query: { phoneBookEntryId: phoneBookEntry._id } });
+      router.push({ path: 'edit-entry/'+phoneBookEntry._id.$oid });
     }
   }
 }

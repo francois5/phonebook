@@ -60,7 +60,7 @@ const store = new Vuex.Store({
           that.dispatch('alert', { msg: 'Error', type: 'danger' });
         });
     },
-    apiPostPhoneBookEntries({ commit }, data) {
+    apiPostPhoneBookEntry({ commit }, data) {
       const that = this;
       that.commit('startLoading');
       axios.post(API_ROOT+'phone-book-entries.php', data, {headers: {"Content-Type": "application/json"}})
@@ -74,7 +74,7 @@ const store = new Vuex.Store({
           that.dispatch('alert', { msg: 'Error', type: 'danger' });
         });
     },
-    apiPutPhoneBookEntries({ commit }, data) {
+    apiPutPhoneBookEntry({ commit }, data) {
       const that = this;
       that.commit('startLoading');
       axios.put(API_ROOT+'phone-book-entries.php', data, {headers: {"Content-Type": "application/json"}})
